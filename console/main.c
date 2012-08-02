@@ -27,7 +27,7 @@ int main(int argc, char ** argv)
 			int option_index = 0;
 			static struct option long_options[] = {
 				{ "tag"			, required_argument	, 0, 't' },
-				{ "key"			, optional_argument	, 0, 'k' },
+				{ "key"			, required_argument	, 0, 'k' },
 				{ "length"		, required_argument	, 0, 'l' },
 				{ "digits"		, no_argument		, 0, 'd' },
 				{ "punctuation"	, no_argument		, 0, 'p' },
@@ -36,7 +36,7 @@ int main(int argc, char ** argv)
 				{ "digits-only"	, no_argument		, 0, 2 }
 			};
 
-			c = getopt_long(argc, argv, "t:k?l:dpm", long_options, &option_index);
+			c = getopt_long(argc, argv, "t:kl:dpm", long_options, &option_index);
 			if (c == -1) break;
 
 			switch (c) {
@@ -110,7 +110,7 @@ int main(int argc, char ** argv)
 
 
 	if (site_tag && master_key && hash_word_size > 0) {
-		char *hash = GenerateHashWord(site_tag, master_key, 8, true, false, true, false, false);
+		char *hash = GenerateHashWord(site_tag, master_key, hash_word_size, flag_digits, flag_punctuation, flag_mixed_case, flag_no_special, flag_digits_only);
 		printf("Result: %s\n", hash);
 		free(hash);
 	}

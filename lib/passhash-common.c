@@ -92,19 +92,19 @@ void InjectSpecialCharacter(char * str, int offset, int reserved, int seed, char
 void RemoveSpecialCharacters(char * str, int seed)
 {
 	char c;
+	int i;
 	int offset;
-	const char *last_aldig = NULL;
-	const char *begin = str;
-	for (; *str; ++str) {
+	int last_aldig = -1;
+	for (i = 0; *str; ++str, ++i) {
 		c = *str;
 		if (c < '0' || (c > '9' && c < 'A') || (c > 'Z' && c < 'a') || c > 'z') {
-			if (last_aldig != NULL) {
-				offset = last_aldig - begin;
-				last_aldig = NULL;
-			} else offset = str - begin;
+			if (last_aldig != -1) {
+				offset = last_aldig;
+				last_aldig = -1;
+			} else offset = i;
 			*str = (seed + offset) % 26 + 65;
 		} else {
-			if (last_aldig == NULL) last_aldig = str;
+			if (last_aldig == -1) last_aldig = i;
 		}
 	}
 }
