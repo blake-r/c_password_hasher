@@ -45,7 +45,7 @@ char * GenerateHashWord(const char * site_tag,
 			InjectSpecialCharacter(hash, 3, 4, seed, 97, 26); // ---
 		}
 		if (restrict_special)
-			RemoveSpecialCharacters(hash, seed); // "28662022101986805287847027"
+			RemoveSpecialCharacters(hash, seed); // "DJRRXBXlCVuKh6ULoN87847QXE"
 	}
 
 	return hash;
